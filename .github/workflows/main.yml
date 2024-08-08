@@ -24,5 +24,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.22.2
-      - run: flutter pub get
-      - run: flutter build apk --dart-define=INVITATION_CODE=http://api.im-test.com:83
+      - name: Build
+        working-directory: release
+        run: ./release_apk.sh
