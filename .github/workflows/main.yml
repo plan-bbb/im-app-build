@@ -26,5 +26,5 @@ jobs:
           keystore-base64: ${{ secrets.ANDROID_RELEASE_KEY }}
           keystore-password: "${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}"
           # optionals
-          build-cmd: flutter build apk --release --flavor dev
+          build-cmd: flutter build apk --release --dart-define=INVITATION_CODE=http://api.im-test.com:83
           working-directory: ./release
