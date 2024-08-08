@@ -1,0 +1,30 @@
+name: Build and distribute
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup ssh key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: |
+            ${{ secrets.GITLAB_TOKEN }}
+
+      - name: Checkout Repository
+        env:
+          GIT_SSH_COMMAND: ssh -o StrictHostKeyChecking=no -o ProxyCommand="ssh -o StrictHostKeyChecking=no ${{ vars.PROXY_USERNAME }}@${{ vars.PROXY_DOMAIN }} -p ${{ vars.PROXY_PORT }} -W %h:%p"
+        run: |
+          git clone --single-branch --depth 1 -b main ${{ vars.GITLAB_REPOSITORY }} release
+      - uses: cedvdb/action-flutter-build-android@v1
+        with:
+          keystore-base64: ${{ secrets.ANDROID_RELEASE_KEY }}
+          keystore-password: "${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}"
+          # optionals
+          build-cmd: flutter build apk --release --flavor dev
+          working-directory: ./release
