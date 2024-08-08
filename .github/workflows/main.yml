@@ -33,4 +33,11 @@ jobs:
           flutter-version: 3.22.2
       - name: Build
         working-directory: release
-        run: ./release_apk.sh
+        run: |
+          flutter pub get;
+          flutter build apk
+      - name: Install Rop
+        run: npm -g install @sevenvip666/rop@latest
+      - name: Upload
+        working-directory: release
+        run: rop upload android universal --accessKey ${{ secrets.ROP_ACCESS_KEY }}
