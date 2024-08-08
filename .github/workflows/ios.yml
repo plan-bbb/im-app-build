@@ -1,4 +1,4 @@
-name: Build and distribute
+name: Build ios
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Setup ssh key
         uses: webfactory/ssh-agent@v0.9.0
@@ -25,6 +25,11 @@ jobs:
         with:
           flutter-version: 3.22.2
           cache: true
+          # optional parameters follow
+          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
+          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
+          pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
       - name: Build
         working-directory: release
         run: |
