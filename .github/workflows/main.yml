@@ -21,6 +21,13 @@ jobs:
           GIT_SSH_COMMAND: ssh -o StrictHostKeyChecking=no -o ProxyCommand="ssh -o StrictHostKeyChecking=no ${{ vars.PROXY_USERNAME }}@${{ vars.PROXY_DOMAIN }} -p ${{ vars.PROXY_PORT }} -W %h:%p"
         run: |
           git clone --single-branch --depth 1 -b jiexun ${{ vars.GITLAB_REPOSITORY }} release
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: 'gradle'
+          check-latest: true
       - uses: cedvdb/action-flutter-build-android@v1
         with:
           keystore-base64: ${{ secrets.ANDROID_RELEASE_KEY }}
