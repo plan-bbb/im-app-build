@@ -40,7 +40,7 @@ jobs:
         working-directory: release
         run: |
           flutter pub get;
-          flutter build apk --target-platform android-arm,android-arm64 --obfuscate
+          flutter build apk --target-platform android-arm,android-arm64 --obfuscate --split-debug-info=./symbols
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
       - name: Upload
