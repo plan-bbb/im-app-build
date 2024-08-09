@@ -39,7 +39,7 @@ jobs:
         with:
           project-path: release/ios/Runner.xcodeproj
           workspace-path: release/ios/Runner.xcworkspace # optional
-          p12-path: release/ios/build_certificate.p12
+          p12-path: release/ios/jiexun.p12
           mobileprovision-path: release/ios/jiexun.mobileprovision
           certificate-password: '123456'
           export-method: 'ad-hoc'
@@ -47,7 +47,7 @@ jobs:
           configuration: 'Release'
           # p12-base64: ${{ secrets.P12_BASE64 }}
           # mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          code-signing-identity: 'com.aims.aszbs'
+          code-signing-identity: 'IOS Distrbution'
           team-id: 89VVD7HUN9
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
