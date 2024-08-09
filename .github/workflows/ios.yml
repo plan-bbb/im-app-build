@@ -47,7 +47,11 @@ jobs:
           configuration: 'Release'
           # p12-base64: ${{ secrets.P12_BASE64 }}
           # mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          code-signing-identity: 'Distribution'
+          code-signing-identity: 'Apple Distribution'
           team-id: 89VVD7HUN9
+          output-path: /Users/runner/work/release/build/ipa/im_app.ipa
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
+      - name: Upload
+        working-directory: release
+        run: rop upload android universal --accessKey ${{ secrets.ROP_ACCESS_KEY }}
