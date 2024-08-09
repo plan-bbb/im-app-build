@@ -38,10 +38,12 @@ jobs:
       - uses: yukiarrr/ios-build-action@v1.12.0
         with:
           project-path: ios/Runner.xcodeproj
-          p12-base64: ${{ secrets.P12_BASE64 }}
-          mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
-          team-id: ${{ secrets.TEAM_ID }}
           workspace-path: ios/Runner.xcworkspace # optional
+          p12-path: ios/build_certificate.p12
+          mobileprovision-path: ios/jiexun.mobileprovision
+          # p12-base64: ${{ secrets.P12_BASE64 }}
+          # mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
+          code-signing-identity: 123456
+          team-id: 89VVD7HUN9
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
