@@ -47,7 +47,7 @@ jobs:
           configuration: 'Release'
           # p12-base64: ${{ secrets.P12_BASE64 }}
           # mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          code-signing-identity: 'IOS Distrbution'
+          code-signing-identity: 'iOS Distribution'
           team-id: 89VVD7HUN9
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
