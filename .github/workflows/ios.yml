@@ -3,7 +3,7 @@ name: Build ios
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   build:
@@ -29,24 +29,3 @@ jobs:
         working-directory: release
         run: |
           flutter pub get;
-          flutter build ios --release --no-codesign
-      - uses: yukiarrr/ios-build-action@v1.12.0
-        with:
-          project-path: release/ios/Runner.xcodeproj
-          workspace-path: release/ios/Runner.xcworkspace # optional
-          p12-path: release/ios/jiexun.p12
-          mobileprovision-path: release/ios/jiexun.mobileprovision
-          certificate-password: '123456'
-          export-method: 'ad-hoc'
-          # export-method: 'development'
-          configuration: 'Release'
-          # p12-base64: ${{ secrets.P12_BASE64 }}
-          # mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          code-signing-identity: 'Apple Distribution'
-          team-id: 89VVD7HUN9
-          output-path: /Users/runner/work/im-app-build/im-app-build/release/build/ios/ipa/im_app.ipa
-      - name: Install Rop
-        run: npm -g install @sevenvip666/rop@latest
-      - name: Upload
-        working-directory: release
-        run: rop upload ios universal --accessKey ${{ secrets.ROP_ACCESS_KEY }}
