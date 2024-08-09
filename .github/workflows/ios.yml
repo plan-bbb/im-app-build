@@ -59,7 +59,7 @@ jobs:
           # mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
           code-signing-identity: 'Apple Distribution'
           team-id: 89VVD7HUN9
-          output-path: /Users/runner/work/release/build/ios/ipa/im_app.ipa
+          output-path: /release/build/ios/ipa/im_app.ipa
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
       - name: Upload
