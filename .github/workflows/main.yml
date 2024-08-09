@@ -32,15 +32,12 @@ jobs:
         with:
           flutter-version: 3.22.2
           cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
-          pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-      - name: Build
+      - name: Pub get
         working-directory: release
-        run: |
-          flutter pub get;
-          flutter build apk --target-platform android-arm,android-arm64 --obfuscate --split-debug-info=./symbols
+        run: flutter pub get
+      - name: Build Android
+        working-directory: release
+        run: flutter build apk --target-platform android-arm,android-arm64
       - name: Install Rop
         run: npm -g install @sevenvip666/rop@latest
       - name: Upload
