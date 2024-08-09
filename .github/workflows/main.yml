@@ -1,4 +1,4 @@
-name: Build and distribute
+name: Build Android
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: build
+    name: build-android
     runs-on: ubuntu-latest
     steps:
       - name: Setup ssh key
