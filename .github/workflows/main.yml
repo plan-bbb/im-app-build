@@ -27,30 +27,6 @@ jobs:
           java-version: '17'
           cache: 'gradle'
           check-latest: true
-            # 缓存 Flutter 依赖  
-      - uses: actions/cache@v2  
-        with:  
-          path: |  
-            ~/.pub-cache  
-            ~/.gradle/caches/  
-            ~/.gradle/wrapper/  
-            ~/.android/build-cache  
-            **/.dart-tool/  
-            **/.flutter-plugins-dependencies  
-            **/.flutter-plugins-flutter-binding-data  
-            **/build  
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/app/build.gradle') }}-${{ hashFiles('**/android/app/build.gradle') }}  
-          restore-keys: |  
-            ${{ runner.os }}-flutter-  
-   
-      # 缓存 Android SDK  
-      - uses: actions/cache@v2  
-        with:  
-          path: |  
-            /usr/local/lib/android/sdk  
-          key: ${{ runner.os }}-android-sdk-${{ hashFiles('**/android/build.gradle') }}  
-          restore-keys: |  
-            ${{ runner.os }}-android-sdk-  
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
